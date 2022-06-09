@@ -2,6 +2,7 @@
 
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Route;
+use App\Http\Controllers\AdminController;
 
 /*
 |--------------------------------------------------------------------------
@@ -14,6 +15,24 @@ use Illuminate\Support\Facades\Route;
 |
 */
 
-Route::middleware('auth:sanctum')->get('/user', function (Request $request) {
-    return $request->user();
+Route::post('/login', [AdminController::class , 'login']);
+Route::post('/register', [AdminController::class , 'register']);
+Route::get('/blogs', [AdminController::class , 'allBlogs']);
+Route::get('/blog/{id}', [AdminController::class , 'singleBlog']);
+Route::get('/addtag', [AdminController::class , 'addTag']);
+Route::post('/updateTag', [AdminController::class , 'updateTag']);
+Route::post('/addCategory', [AdminController::class , 'addCategory']);
+Route::post('/updateCategory/{id}', [AdminController::class , 'updateCategory']);
+
+
+
+
+
+Route::group(['middleware' => ['auth:sanctum']] , function () {
+    Route::post('/logout', [AdminController::class , 'logout']);
+    Route::post('/addCategory', [AdminController::class , 'addCategory']);
+    Route::post('deleteBlog', [AdminController::class , 'deleteBlog']); //
+    Route::post('/userType/{id}', [AdminController::class , 'userType']);
 });
+
+

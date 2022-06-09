@@ -3,6 +3,7 @@
 namespace Database\Factories;
 
 use Illuminate\Database\Eloquent\Factories\Factory;
+use Illuminate\Support\Str;
 
 /**
  * @extends \Illuminate\Database\Eloquent\Factories\Factory<\App\Models\blog>
@@ -16,8 +17,15 @@ class BlogFactory extends Factory
      */
     public function definition()
     {
+        $name = $this->faker->text('10');
         return [
             //
+            'title' => $name,
+            'slug' => str::slug($name),
+            'content' => $this->faker->text('240'),
+            'user_id' => 1,
+
+
         ];
     }
 }

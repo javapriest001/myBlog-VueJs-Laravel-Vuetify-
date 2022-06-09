@@ -16,11 +16,19 @@ return new class extends Migration
         Schema::create('blogs', function (Blueprint $table) {
             $table->id();
             $table->string('title');
-            $table->string('slug');
-            $table->string('content');
-            $table->string('tags');
+            $table->string('slug')->unique();
+            $table->text('post');
+            $table->string('postExcerpt');
+            $table->unsignedBigInteger('user_id');
+            $table->string('featuredImage');
+            $table->string('metaDescription');
+            $table->Integer('views')->default(0);
             $table->timestamps();
+
+            $table->foreign('user_id')->references('id')->on('users');
         });
+
+
     }
 
     /**

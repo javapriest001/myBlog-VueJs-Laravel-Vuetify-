@@ -18,10 +18,13 @@ return new class extends Migration
             $table->string('firstname');
             $table->string('lastname');
             $table->string('email')->unique();
-            $table->timestamp('email_verified_at')->nullable();
             $table->string('password');
-            $table->string('avatar');
-            $table->rememberToken();
+            $table->string('avatar')->default('avatar.png');
+            $table->string('userType')->default('user');
+            $table->boolean('isActive')->default(0);
+            $table->string('passwordResetCode')->nullable();
+            $table->timestamp('activationCode')->nullable();
+            $table->timestamp('socialType')->nullable();
             $table->timestamps();
         });
     }
