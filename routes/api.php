@@ -17,12 +17,14 @@ use App\Http\Controllers\AdminController;
 
 Route::post('/login', [AdminController::class , 'login']);
 Route::post('/register', [AdminController::class , 'register']);
+Route::get('/users', [AdminController::class , 'users']);
 Route::get('/blogs', [AdminController::class , 'allBlogs']);
 Route::get('/blog/{id}', [AdminController::class , 'singleBlog']);
 Route::get('/addtag', [AdminController::class , 'addTag']);
 Route::post('/updateTag', [AdminController::class , 'updateTag']);
 Route::post('/addCategory', [AdminController::class , 'addCategory']);
 Route::post('/updateCategory/{id}', [AdminController::class , 'updateCategory']);
+Route::get('/category', [AdminController::class , 'category']);
 
 
 

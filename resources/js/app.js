@@ -7,6 +7,13 @@ import 'vuetify/dist/vuetify.min.css'
 import colors from 'vuetify/lib/util/colors'
 import ViewUI from 'view-design';
 import Editor from 'vue-editor-js/src/index'
+import store from './store/store'
+// import VueQuillEditor from 'vue-quill-editor'
+// import 'quill/dist/quill.core.css' // import styles
+// import 'quill/dist/quill.snow.css' // for snow theme
+// import 'quill/dist/quill.bubble.css' // for bubble theme
+//
+// Vue.use(VueQuillEditor, /* { default global options } */)
 
 Vue.use(Editor)
 
@@ -42,6 +49,7 @@ export const bus = new Vue();
 const app = new Vue({
     el: '#app',
     router,
+    store,
     vuetify: new vuetify(),
 
 });

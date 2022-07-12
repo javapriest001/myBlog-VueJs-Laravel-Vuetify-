@@ -27,8 +27,10 @@
     "autoprefixer": "10.4.5",
     "view-design": "^4.7.0",
     "vue-editor-js": "^2.0.2",
+    "vue-quill-editor": "^3.0.6",
     "vue-router": "^3.5.4",
-    "vuetify": "^2.6.0"
+    "vuetify": "^2.6.0",
+    "vuex": "^3.6.2"
   },
   "devDependencies": {
     "@popperjs/core": "^2.10.2",

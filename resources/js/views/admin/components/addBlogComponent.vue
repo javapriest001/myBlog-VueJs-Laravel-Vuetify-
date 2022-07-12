@@ -17,27 +17,32 @@
 
             </v-card>
             <v-card class="">
-                <Editor ref="editor" :config="{
-                tools: {
-                  header: require('@editorjs/header'),
-                  list: require('@editorjs/list'),
-                  linktool: require('@editorjs/link'),
-                  code: require('@editorjs/code'),
-                  personality: require('@editorjs/personality'),
-                  embed: require('@editorjs/embed'),
-                  marker: require('@editorjs/marker'),
-                  table: require('@editorjs/table'),
-                  delimiter: require('@editorjs/delimiter'),
-                  quote: require('@editorjs/quote'),
-                  image: require('@editorjs/image'),
-                    warning: require('@editorjs/warning'),
-                    paragraph: require('@editorjs/paragraph'),
-                    checklist: require('@editorjs/checklist')
-                }
-    }"          />
+                <quillEditor
+                    v-model="content"
+                    :options="editorOption"
+                    ref="myQuillEditor"
+                />
+<!--                <Editor ref="editor" :config="{-->
+<!--                tools: {-->
+<!--                  header: require('@editorjs/header'),-->
+<!--                  list: require('@editorjs/list'),-->
+<!--                  linktool: require('@editorjs/link'),-->
+<!--                  code: require('@editorjs/code'),-->
+<!--                  personality: require('@editorjs/personality'),-->
+<!--                  embed: require('@editorjs/embed'),-->
+<!--                  marker: require('@editorjs/marker'),-->
+<!--                  table: require('@editorjs/table'),-->
+<!--                  delimiter: require('@editorjs/delimiter'),-->
+<!--                  quote: require('@editorjs/quote'),-->
+<!--                  image: require('@editorjs/image'),-->
+<!--                    warning: require('@editorjs/warning'),-->
+<!--                    paragraph: require('@editorjs/paragraph'),-->
+<!--                    checklist: require('@editorjs/checklist')-->
+<!--                }-->
+<!--    }"          />-->
 
 
-                <button @click="invokeSave">Save</button>
+<!--                <button @click="invokeSave">Save</button>-->
             </v-card>
         </v-dialog>
     </div>
@@ -45,43 +50,38 @@
 
 <script>
 import {bus} from "../../../app.js"
+import 'quill/dist/quill.core.css'
+import 'quill/dist/quill.snow.css'
+import 'quill/dist/quill.bubble.css'
+
+import { quillEditor } from 'vue-quill-editor'
 export default {
     name: "addBlogPopUp",
-    components: {},
+    components: {
+        quillEditor,
+    },
 
     data(){
         return {
-            config: {
-
-                tools: {
-
-                },
-
-
-
-
-
-                image: {
-                    // Like in https://github.com/editor-js/image#config-params
-                    endpoints: {
-                        byFile: 'http://localhost:8090/image',
-                        byUrl: 'http://localhost:8090/image-by-url',
-                    },
-                    field: 'image',
-                    types: 'image/*',
-                },
-            }
+            content: ' ',
+            editorOption: {
+                // Some Quill options...
+                placeholder: 'Start a new blog post',
+                debug: 'info',
+                readOnly: true,
+                theme: 'snow'
+            },
+            delta: undefined,
         }
     },
+    watch:{
+      content(val){
+          this.delta = this.$refs.myQuillEditor.quill.getContents()
+          console.log(this.delta)
+      }
+    },
     methods: {
-        invokeSave() {
-            this.$refs.editor._data.state.editor.save()
-                .then((data) => {
-                    // Do what you want with the data here
-                    console.log(data)
-                })
-                .catch(err => { console.log(err) })
-        }
+
     }
 
 }
